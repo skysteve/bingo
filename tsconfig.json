@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "es6",
+      "es7"
+    ],
+    "module": "ES6",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es6",
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "src/caller/js/index.ts",
+    "src/display/index.ts"
+  ]
+}
