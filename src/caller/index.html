@@ -44,14 +44,19 @@
     </header>
     <main class="mdl-layout__content">
         <div class="page-content">
-            <button id="btnCall">Call numbers</button>
-            <p>Last Called</p>
-            <ul id="lastCalled">
-
-            </ul>
+          <button id="btnCall">Call numbers</button>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--5-col">
+              <p>Last Called</p>
+              <h3 id="latest_number"></h3>
+            </div>
+            <div class="mdl-cell mdl-cell--7-col" id="previousHolder">
+            </div>
+          </div>
         </div>
     </main>
 </div>
+<!--INCLUDE_TEMPLATES-->
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <script defer src="index.js"></script>
 </body>
