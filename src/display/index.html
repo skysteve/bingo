@@ -1,0 +1,185 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Bingo Display</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-blue.min.css" />
+  <style>
+    #latest_number {
+      text-align: center;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
+      word-wrap: break-word;
+      display: inline-block;
+      font-size: 300px;
+      padding-top: 50px;
+      position: relative;
+      top: 40%;
+    }
+  </style>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--5-col">
+              <h3 id="latest_number"></h3>
+            </div>
+            <div class="mdl-cell mdl-cell--7-col">
+              <h3>Previous Numbers</h3>
+              <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <tr>
+                  <td id="tbl-1">1</td>
+                  <td id="tbl-2">2</td>
+                  <td id="tbl-3">3</td>
+                  <td id="tbl-4">4</td>
+                  <td id="tbl-5">5</td>
+                  <td id="tbl-6">6</td>
+                  <td id="tbl-7">7</td>
+                  <td id="tbl-8">8</td>
+                  <td id="tbl-9">9</td>
+                  <td id="tbl-10">10</td>
+                </tr>
+                <tr>
+                  <td id="tbl-11">11</td>
+                  <td id="tbl-12">12</td>
+                  <td id="tbl-13">13</td>
+                  <td id="tbl-14">14</td>
+                  <td id="tbl-15">15</td>
+                  <td id="tbl-16">16</td>
+                  <td id="tbl-17">17</td>
+                  <td id="tbl-18">18</td>
+                  <td id="tbl-19">19</td>
+                  <td id="tbl-20">20</td>
+                </tr>
+                <tr>
+                  <td id="tbl-21">21</td>
+                  <td id="tbl-22">22</td>
+                  <td id="tbl-23">23</td>
+                  <td id="tbl-24">24</td>
+                  <td id="tbl-25">25</td>
+                  <td id="tbl-26">26</td>
+                  <td id="tbl-27">27</td>
+                  <td id="tbl-28">28</td>
+                  <td id="tbl-29">29</td>
+                  <td id="tbl-30">30</td>
+                </tr>
+                <tr>
+                  <td id="tbl-31">31</td>
+                  <td id="tbl-32">32</td>
+                  <td id="tbl-33">33</td>
+                  <td id="tbl-34">34</td>
+                  <td id="tbl-35">35</td>
+                  <td id="tbl-36">36</td>
+                  <td id="tbl-37">37</td>
+                  <td id="tbl-38">38</td>
+                  <td id="tbl-39">39</td>
+                  <td id="tbl-40">40</td>
+                </tr>
+                <tr>
+                  <td id="tbl-41">41</td>
+                  <td id="tbl-42">42</td>
+                  <td id="tbl-43">43</td>
+                  <td id="tbl-44">44</td>
+                  <td id="tbl-45">45</td>
+                  <td id="tbl-46">46</td>
+                  <td id="tbl-47">47</td>
+                  <td id="tbl-48">48</td>
+                  <td id="tbl-49">49</td>
+                  <td id="tbl-50">50</td>
+                </tr>
+                <tr>
+                  <td id="tbl-51">51</td>
+                  <td id="tbl-52">52</td>
+                  <td id="tbl-53">53</td>
+                  <td id="tbl-54">54</td>
+                  <td id="tbl-55">55</td>
+                  <td id="tbl-56">56</td>
+                  <td id="tbl-57">57</td>
+                  <td id="tbl-58">58</td>
+                  <td id="tbl-59">59</td>
+                  <td id="tbl-60">60</td>
+                </tr>
+                <tr>
+                  <td id="tbl-61">61</td>
+                  <td id="tbl-62">62</td>
+                  <td id="tbl-63">63</td>
+                  <td id="tbl-64">64</td>
+                  <td id="tbl-65">65</td>
+                  <td id="tbl-66">66</td>
+                  <td id="tbl-67">67</td>
+                  <td id="tbl-68">68</td>
+                  <td id="tbl-69">69</td>
+                  <td id="tbl-70">70</td>
+                </tr>
+                <tr>
+                  <td id="tbl-71">71</td>
+                  <td id="tbl-72">72</td>
+                  <td id="tbl-73">73</td>
+                  <td id="tbl-74">74</td>
+                  <td id="tbl-75">75</td>
+                  <td id="tbl-76">76</td>
+                  <td id="tbl-77">77</td>
+                  <td id="tbl-78">78</td>
+                  <td id="tbl-79">79</td>
+                  <td id="tbl-80">80</td>
+                </tr>
+                <tr>
+                  <td id="tbl-81">81</td>
+                  <td id="tbl-82">82</td>
+                  <td id="tbl-83">83</td>
+                  <td id="tbl-84">84</td>
+                  <td id="tbl-85">85</td>
+                  <td id="tbl-86">86</td>
+                  <td id="tbl-87">87</td>
+                  <td id="tbl-88">88</td>
+                  <td id="tbl-89">89</td>
+                  <td id="tbl-90">90</td>
+                </tr>
+                <tr>
+                  <td id="tbl-91">91</td>
+                  <td id="tbl-92">92</td>
+                  <td id="tbl-93">93</td>
+                  <td id="tbl-94">94</td>
+                  <td id="tbl-95">95</td>
+                  <td id="tbl-96">96</td>
+                  <td id="tbl-97">97</td>
+                  <td id="tbl-98">98</td>
+                  <td id="tbl-99">99</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+    </main>
+</div>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script defer src="index.js"></script>
+</body>
+</html>
