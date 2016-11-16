@@ -6,7 +6,10 @@ export class Game {
   private lastNumber: number;
 
   constructor() {
-    this.currentGame = [];
+    const recoveredValues = window.sessionStorage.getItem('currentGame');
+    const recoveredLastNumber = window.sessionStorage.getItem('lastNumber');
+    this.currentGame = recoveredValues ? JSON.parse(recoveredValues) : [];
+    this.lastNumber = recoveredLastNumber ? parseInt(recoveredLastNumber, 10) : null;
   }
 
   public get calledNumbers(): Array<number> {
@@ -31,11 +34,15 @@ export class Game {
 
     this.currentGame.push(number);
     this.lastNumber = number;
+    window.sessionStorage.setItem('lastNumber', number.toString());
+    window.sessionStorage.setItem('currentGame', JSON.stringify(this.currentGame));
     return number;
   }
 
   public reset(): void {
     this.currentGame = [];
+    window.sessionStorage.removeItem('lastNumber');
+    window.sessionStorage.removeItem('currentGame');
   }
 
   private static getNumber(): number {

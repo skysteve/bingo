@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // recover game in case of refresh
+  game.calledNumbers.forEach(number => elements.display.previousNumbers.setCalled(number));
+  elements.display.lastCalled.textContent = game.latestNumber || '-';
+
   elements.buttons.callNumber.addEventListener('click', () => {
     const number = game.nextNumber();
     // add the number to our current list

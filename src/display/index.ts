@@ -5,6 +5,24 @@ declare var window;
 declare var console;
 declare var document;
 
+function speakNumber(num: number): void {
+  const numString = num.toString();
+  let text = numString;
+
+  // break the numbers out to the digits (e.g. 24. 2. 4. 24)
+  // the . ensures a pause between numbers
+  if (numString.length > 1) {
+    for (let i = 0; i < numString.length; i++) {
+      text += `. ${numString.charAt(i)}`;
+    }
+
+    text += `.. ${numString}`;
+  }
+
+  const msg = new window.SpeechSynthesisUtterance(text);
+  window.speechSynthesis.speak(msg);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const channel = new window.BroadcastChannel('__BUS_NAME__');
   const elLatest = document.querySelector('#latest_number');
@@ -36,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'called':
         elLatest.textContent = e.data.number;
         elTable.setCalled(e.data.number);
+        speakNumber(e.data.number);
         break;
       case 'reset':
         elTable.reset();
@@ -45,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // if our display re-connects we get an update of the current state of the game, so replicate it
         elTable.reset();
         e.data.calledNumbers.forEach(number => elTable.setCalled(number));
-        elLatest.textContent = e.data.latestNumber;
+        elLatest.textContent = e.data.latestNumber || '-';
         break;
       default:
         console.warn('Unknown message type', e.data);
