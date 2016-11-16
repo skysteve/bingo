@@ -40,6 +40,9 @@
       position: relative;
       top: 40%;
     }
+    body {
+      cursor: none;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +51,7 @@
         <div class="page-content">
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--5-col">
-              <h3 id="latest_number"></h3>
+              <h3 id="latest_number">-</h3>
             </div>
             <div class="mdl-cell mdl-cell--7-col" id="previousHolder">
               <table-last-called id="tableLastCalled"></table-last-called>
@@ -56,6 +59,10 @@
           </div>
         </div>
     </main>
+  <div id="toastMsg" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
 </div>
 <!--INCLUDE_TEMPLATES-->
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>

@@ -15,7 +15,7 @@ export class TblLastCalled extends HTMLElement {
   }
 
   reset() {
-    for (let i=0; i < 100; i++) {
+    for (let i=1; i < 100; i++) {
       const elCalled = this.shadowRoot.querySelector(`#tbl-${i}`);
       elCalled.classList.remove(ACTIVE_CLASS);
     }

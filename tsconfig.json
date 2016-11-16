@@ -14,9 +14,8 @@
   "exclude": [
     "node_modules"
   ],
-  "files": [
-    "src/caller/js/index.ts",
-    "src/customElements/index.ts",
-    "src/display/index.ts"
+  "include": [
+    "src/caller/**/*.ts",
+    "src/display/**/*.ts"
   ]
 }
