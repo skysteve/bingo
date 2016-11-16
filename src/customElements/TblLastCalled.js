@@ -8,14 +8,14 @@ export class TblLastCalled extends HTMLElement {
 
   constructor() {
     super();
-    let shadowRoot = this.attachShadow({mode: 'open'});
+    const shadowRoot = this.attachShadow({ mode: 'open' });
     const t = document.querySelector('#template-numbers-table');
     const instance = t.content.cloneNode(true);
     shadowRoot.appendChild(instance);
   }
 
   reset() {
-    for (let i=1; i < 100; i++) {
+    for (let i = 1; i < 100; i++) {
       const elCalled = this.shadowRoot.querySelector(`#tbl-${i}`);
       elCalled.classList.remove(ACTIVE_CLASS);
     }
