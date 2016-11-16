@@ -14,11 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const channel = new window.BroadcastChannel('__BUS_NAME__');
 
   const elBtnCall = document.querySelector('#btnCall');
-  // render previous holder template TODO this should be a custom element
-  const elPreviousHolder = document.querySelector('#previousHolder');
-  const elTemplate = document.querySelector('#template-numbers-table');
-  const clone = document.importNode(elTemplate.content, true);
-  elPreviousHolder.appendChild(clone);
+  const elTable = document.querySelector('#tableLastCalled');
 
   elBtnCall.addEventListener('click', () => {
     // check the game isn't over
@@ -34,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // add the number to our current list
     currentGame.push(number);
-    const elCalled = document.querySelector(`#tbl-${number}`);
-    elCalled.classList.add('mdl-color--green-200');
+    elTable.setCalled(number);
 
     // send the number to the next tab
     channel.postMessage({

@@ -16,6 +16,7 @@
   ],
   "files": [
     "src/caller/js/index.ts",
+    "src/customElements/index.ts",
     "src/display/index.ts"
   ]
 }
