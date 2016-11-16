@@ -51,9 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
   channel.onmessage = (e) => {
     switch (e.data.messageType) {
       case 'display_connected':
+        debugger;
         displayConnected = true;
         elements.connection.connected.removeAttribute('style');
         elements.connection.disconnected.style.display = 'none';
+        channel.postMessage({
+          messageType: 'active_game',
+          calledNumbers: game.calledNumbers,
+          latestNumber: game.latestNumber
+        });
         break;
       case 'display_disconnected':
         displayConnected = false;

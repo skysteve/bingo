@@ -3,9 +3,18 @@
  */
 export class Game {
   private currentGame: Array<number>;
+  private lastNumber: number;
 
   constructor() {
     this.currentGame = [];
+  }
+
+  public get calledNumbers(): Array<number> {
+    return this.currentGame;
+  }
+
+  public get latestNumber(): number {
+    return this.lastNumber;
   }
 
   public nextNumber(): number {
@@ -20,6 +29,8 @@ export class Game {
       number = Game.getNumber();
     }
 
+    this.currentGame.push(number);
+    this.lastNumber = number;
     return number;
   }
 

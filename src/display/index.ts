@@ -41,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         elTable.reset();
         elLatest.textContent = '-';
         break;
+      case 'active_game':
+        // if our display re-connects we get an update of the current state of the game, so replicate it
+        elTable.reset();
+        e.data.calledNumbers.forEach(number => elTable.setCalled(number));
+        elLatest.textContent = e.data.latestNumber;
+        break;
       default:
         console.warn('Unknown message type', e.data);
     }
