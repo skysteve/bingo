@@ -16,6 +16,7 @@
   ],
   "include": [
     "src/caller/**/*.ts",
+    "src/cast_receiver/**/*.ts",
     "src/display/**/*.ts"
   ]
 }
