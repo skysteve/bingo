@@ -96,6 +96,23 @@ gulp.task('script-caller', ['typescript'], () => {
   });
 });
 
+gulp.task('script-cast_receiver', ['typescript'], () => {
+  return rollup({
+    entry: 'tmp/cast_receiver/index.js',
+    plugins: [
+      nodeResolve({ jsnext: true }),
+      commonjs(),
+      rollupJson({})
+    ]
+  }).then((bundle) => {
+    return bundle.write({
+      format: 'iife',
+      dest: 'dist/cast_receiver/index.js',
+      sourceMap: true
+    });
+  });
+});
+
 gulp.task('script-customElements', () => {
   return rollup({
     entry: 'src/customElements/index.js',
@@ -126,6 +143,6 @@ gulp.task('watch', () => {
 // TODO minify all the things
 // TODO pull in material design from npm
 
-gulp.task('build', ['script-display', 'script-caller', 'script-customElements', 'includeTemplates']);
+gulp.task('build', ['script-display', 'script-caller', 'script-customElements', 'script-cast_receiver', 'includeTemplates']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);

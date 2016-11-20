@@ -47,21 +47,18 @@
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
           <p>Receiver of the casts</p>
-          <video id='media'/>
+          <ul id="messageList">
 
+          </ul>
         </div>
       </div>
     </div>
   </main>
 </div>
 <!--INCLUDE_TEMPLATES-->
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script defer src="//code.getmdl.io/1.2.1/material.min.js"></script>
 <script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-<script>
-  window.mediaElement = document.getElementById('media');
-  window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
-  window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-  window.castReceiverManager.start();
-</script>
+<script src="../customElements.js"></script>
+<script defer src="index.js"></script>
 </body>
 </html>
