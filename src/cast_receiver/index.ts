@@ -57,14 +57,4 @@ customMessageBus.onMessage = (e) => {
   }
 };
 
-window.addEventListener('beforeunload', () => {
-  customMessageBus.broadcast({
-    messageType: 'display_disconnected'
-  });
-});
-
-customMessageBus.broadcast({
-  messageType: 'display_connected'
-});
-
 window.castReceiverManager.start();
