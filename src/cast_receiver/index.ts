@@ -18,6 +18,9 @@ const elToast = document.querySelector('#toastMsg');
 
 // listen for messages from the caller and update the display
 customMessageBus.onMessage = (e) => {
+  if (typeof e.data === 'string') {
+    e.data = JSON.parse(e.data);
+  }
   let toastData;
   switch (e.data.messageType) {
     case 'caller_connected':
