@@ -2,6 +2,7 @@
  * Created by steve on 15/11/2016.
  */
 import {Game} from './Game';
+import {initializeCastApi, onCastClick} from './googleCast';
 declare var window;
 declare var console;
 declare var document;
@@ -14,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const elements = {
     buttons: {
       callNumber: document.querySelector('#btn-call'),
-      resetGame: document.querySelector('#btn-reset')
+      resetGame: document.querySelector('#btn-reset'),
+      cast: document.querySelector('#aCast')
     },
     connection: {
       connected: document.querySelector('#display-connected'),
@@ -79,6 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
       messageType: 'caller_disconnected'
     });
   });
+
+  window['__onGCastApiAvailable'] = function (isAvailable) {
+    if (isAvailable) {
+      initializeCastApi();
+    } else {
+      console.warn('cast not available');
+    }
+  };
+
+  elements.buttons.cast.addEventListener('click', onCastClick);
 
   channel.postMessage({
     messageType: 'caller_connected'
