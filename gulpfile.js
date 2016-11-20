@@ -49,7 +49,11 @@ gulp.task('includeTemplates', ['html'], () => {
 
   fileContents = fs.readFileSync('./dist/display/index.html').toString();
   fileContents = fileContents.replace('<!--INCLUDE_TEMPLATES-->', templateString);
-  fs.writeFileSync('./dist/display/index.html', fileContents)
+  fs.writeFileSync('./dist/display/index.html', fileContents);
+
+  fileContents = fs.readFileSync('./dist/cast_receiver/index.html').toString();
+  fileContents = fileContents.replace('<!--INCLUDE_TEMPLATES-->', templateString);
+  fs.writeFileSync('./dist/cast_receiver/index.html', fileContents)
 });
 
 gulp.task('lint', () =>
