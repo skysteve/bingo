@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'called':
         elLatest.textContent = e.data.number;
         elTable.setCalled(e.data.number);
-        speakNumber(e.data.number);
+        // speakNumber(e.data.number);
         break;
       case 'reset':
         elTable.reset();
