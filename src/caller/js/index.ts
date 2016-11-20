@@ -1,20 +1,23 @@
 /**
  * Created by steve on 15/11/2016.
  */
+import {ChannelManager} from './ChannelManager';
 import {Game} from './Game';
+import {onCastClick} from './googleCast';
 declare var window;
 declare var console;
 declare var document;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const channel = new window.BroadcastChannel('__BUS_NAME__');
+  const channelManager = new ChannelManager();
   const game = new Game();
   let displayConnected = false;
 
   const elements = {
     buttons: {
       callNumber: document.querySelector('#btn-call'),
-      resetGame: document.querySelector('#btn-reset')
+      resetGame: document.querySelector('#btn-reset'),
+      cast: document.querySelector('#aCast')
     },
     connection: {
       connected: document.querySelector('#display-connected'),
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.display.lastCalled.textContent = number.toString();
 
     // send the number to the next tab
-    channel.postMessage({
+    channelManager.sendMessage({
       messageType: 'called',
       number: number
     });
@@ -47,18 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
     game.reset();
     elements.display.previousNumbers.reset();
     elements.display.lastCalled.textContent = '-';
-      channel.postMessage({
+    channelManager.sendMessage({
       messageType: 'reset'
     });
   });
 
-  channel.onmessage = (e) => {
+  channelManager.onmessage = (e) => {
     switch (e.data.messageType) {
       case 'display_connected':
         displayConnected = true;
         elements.connection.connected.removeAttribute('style');
         elements.connection.disconnected.style.display = 'none';
-        channel.postMessage({
+        channelManager.sendMessage({
           messageType: 'active_game',
           calledNumbers: game.calledNumbers,
           latestNumber: game.latestNumber
@@ -75,12 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('beforeunload', () => {
-    channel.postMessage({
+    channelManager.sendMessage({
       messageType: 'caller_disconnected'
     });
   });
 
-  channel.postMessage({
+  elements.buttons.cast.addEventListener('click', onCastClick);
+
+  channelManager.sendMessage({
     messageType: 'caller_connected'
   });
 });

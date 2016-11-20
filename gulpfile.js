@@ -137,7 +137,7 @@ gulp.task('typescript', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['src/**/*.js', 'src/**/*.html'], ['build']);
+  gulp.watch(['src/**/*.js', 'src/**/*.ts', 'src/**/*.html'], ['build']);
 });
 
 // TODO minify all the things
