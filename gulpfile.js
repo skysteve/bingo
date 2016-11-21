@@ -31,6 +31,20 @@ gulp.task('copyFavicon', () => {
     }));
 });
 
+gulp.task('copyManifest', () => {
+  return gulp.src(['src/caller/manifest.json'])
+    .pipe(gulpCopy('dist/caller', {
+      prefix: 2
+    }));
+});
+
+gulp.task('copyImages', ['copyFavicon', 'copyManifest'], () => {
+  return gulp.src(['src/images/**/*'])
+    .pipe(gulpCopy('dist', {
+      prefix: 1
+    }));
+});
+
 gulp.task('html', () => {
   const target = gulp.src('./src/**/index.html');
 
@@ -130,6 +144,23 @@ gulp.task('script-customElements', () => {
   });
 });
 
+gulp.task('script-serviceWorker', () => {
+  return rollup({
+    entry: 'src/caller/serviceWorker/index.js',
+    plugins: [
+      nodeResolve({ jsnext: true }),
+      commonjs(),
+      rollupJson({})
+    ]
+  }).then((bundle) => {
+    return bundle.write({
+      format: 'iife',
+      dest: 'dist/caller/serviceWorker.js',
+      sourceMap: true
+    });
+  });
+});
+
 gulp.task('typescript', () => {
   return tsProject.src()
     .pipe(tsProject())
@@ -143,6 +174,6 @@ gulp.task('watch', () => {
 // TODO minify all the things
 // TODO pull in material design from npm
 
-gulp.task('build', ['script-display', 'script-caller', 'script-customElements', 'script-cast_receiver', 'includeTemplates']);
+gulp.task('build', ['copyImages', 'script-display', 'script-caller', 'script-customElements', 'script-cast_receiver', 'script-serviceWorker', 'includeTemplates']);
 gulp.task('test', ['lint'], () => {});
 gulp.task('default', ['test']);
