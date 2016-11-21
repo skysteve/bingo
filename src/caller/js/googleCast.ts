@@ -62,6 +62,7 @@ export class GoogleCast {
       document.querySelector('#castIcon').removeAttribute('style');
     } else if (e === chrome.cast.ReceiverAvailability.UNAVAILABLE) {
       console.log('cast receivers unavailable');
+      document.querySelector('#castIcon').setAttribute('style', 'display:none;');
     } else {
       console.log('receiver event', e);
       this.onMsgCB(e);
