@@ -5,8 +5,8 @@ declare var chrome;// TODO find types
 export class GoogleCast {
   private sessions: Array<any>;
   private onMsgCB: Function;
-  private elButton: any;
-  private elCastIcon: any;
+  private elButtons: Array<any>;
+  private elCastIcons: Array<any>;
 
   constructor() {
     this.sessions = [];
@@ -17,10 +17,10 @@ export class GoogleCast {
 
     chrome.cast.initialize(apiConfig, this.onInitSuccess.bind(this), this.onError.bind(this));
 
-    this.elButton = document.querySelector('#aCast');
-    this.elButton.addEventListener('click', this.onCastClick.bind(this));
+    this.elButtons = document.querySelectorAll('.aCast');
+    this.elButtons.forEach(elButton => elButton.addEventListener('click', this.onCastClick.bind(this)));
 
-    this.elCastIcon = document.querySelector('#castIcon');
+    this.elCastIcons = document.querySelectorAll('.castIcon');
   }
 
   public isAvailable(): boolean {
@@ -41,7 +41,7 @@ export class GoogleCast {
     this.sessions.push(session);
     console.log('Cast session initialised');
 
-    this.elCastIcon.textContent = 'cast_connected';
+    this.elCastIcons.forEach(el => el.textContent = 'cast_connected');
 
     session.addUpdateListener(this.onSessionUpdate.bind(this, session));
 
@@ -59,10 +59,10 @@ export class GoogleCast {
   private receiverListener(e) {
     if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
       console.log('cast receivers available');
-      document.querySelector('#castIcon').removeAttribute('style');
+      this.elCastIcons.forEach(el => el.removeAttribute('style'));
     } else if (e === chrome.cast.ReceiverAvailability.UNAVAILABLE) {
       console.log('cast receivers unavailable');
-      document.querySelector('#castIcon').setAttribute('style', 'display:none;');
+      this.elCastIcons.forEach(el => el.setAttribute('style', 'display:none;'));
     } else {
       console.log('receiver event', e);
       this.onMsgCB(e);
@@ -77,7 +77,7 @@ export class GoogleCast {
     }
 
     if (!this.isAvailable()) {
-      this.elCastIcon.textContent = 'cast';
+      this.elCastIcons.forEach(el => el.textContent = 'cast');
     }
   }
 

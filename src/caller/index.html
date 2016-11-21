@@ -28,37 +28,60 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-blue.min.css" />
+  <style>
+    .mdl-card__actions {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .mdl-card {
+      padding: 8px;
+    }
+  </style>
 </head>
-<body>
+<body class="mdl-base">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Bingo</span>
+            <span class="mdl-layout-title" style="left: -50px;">Bingo</span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="../display" target="_blank">Open Display</a>
-                <a class="mdl-navigation__link" href="javascript:void(0);" id="aCast">
-                  <i class="material-icons" id="castIcon" style="display: none;">cast</i>
+                <a class="mdl-navigation__link" href="javascript:void(0);" class="aCast">
+                  <i class="material-icons" class="castIcon" style="display: none;">cast</i>
                 </a>
+            </nav>
+            <nav class="mdl-navigation mdl-layout--small-screen-only"></a>
+              <a class="mdl-navigation__link" href="javascript:void(0);" class="aCast">
+                <i class="material-icons" class="castIcon" style="display: none;">cast</i>
+              </a>
             </nav>
         </div>
     </header>
     <main class="mdl-layout__content">
-      <div class="page-content">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--5-col">
-              <button id="btn-call" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Call number</button>
+      <div class="mdl-layout__tab-panel is-active">
+        <section class="section--center mdl-grid mdl-shadow--2dp">
+          <div class="mdl-card mdl-cell mdl-shadow--2dp mdl-cell--6-col">
+            <div class="mdl-card__supporting-text">
               <h3>Last Called</h3>
               <h3 id="latest-number">-</h3>
-            <button id="btn-reset" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Reset Game</button>
+            </div>
+            <div class="mdl-card__actions">
+              <button id="btn-call" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Call number</button>
+            </div>
           </div>
-          <div class="mdl-cell mdl-cell--7-col" id="previousHolder">
-            <table-last-called id="table-last-called"></table-last-called>
+          <div class="mdl-card mdl-cell mdl-shadow--2dp mdl-cell--6-col">
+            <div class="mdl-card__supporting-text">
+              <h3>Previous Numbers</h3>
+              <table-last-called id="table-last-called"></table-last-called>
+            </div>
+            <div class="mdl-card__actions">
+              <button id="btn-reset" class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored">Reset Game</button>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
 </div>
