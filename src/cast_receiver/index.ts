@@ -50,10 +50,11 @@ customMessageBus.onMessage = (e) => {
       elLatest.textContent = '-';
       break;
     case 'active_game':
+
       // if our display re-connects we get an update of the current state of the game, so replicate it
+      elLatest.textContent = e.data.latestNumber || '-';
       elTable.reset();
       e.data.calledNumbers.forEach(number => elTable.setCalled(number));
-      elLatest.textContent = e.data.latestNumber || '-';
       break;
     default:
       console.warn('Unknown message type', e.data);
