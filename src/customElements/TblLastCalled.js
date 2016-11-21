@@ -12,7 +12,7 @@ export class TblLastCalled extends HTMLElement {
     const elTable = document.createElement('table');
     const elBody = document.createElement('tbody');
 
-    const width = document.documentElement.clientWidth < 1000 ? 5 : 10;
+    const width = document.documentElement.clientWidth < 800 ? 5 : 10;
     let num = 1;
 
     for (let i = 0; i < max; i += width) {
