@@ -10,19 +10,20 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    <link rel="icon" sizes="192x192" href="../images/android-icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f44336">
+    <meta name="apple-mobile-web-app-title" content="Bingo">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-icon.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="msapplication-TileImage" content="../images/touch/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#f44336">
 
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="../images/favicon.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -39,7 +40,9 @@
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="../display" target="_blank">Open Display</a>
-                <a class="mdl-navigation__link" href="javascript:void(0);" id="aCast">Cast</a>
+                <a class="mdl-navigation__link" href="javascript:void(0);" id="aCast">
+                  <i class="material-icons">cast</i>
+                </a>
             </nav>
         </div>
     </header>
@@ -70,9 +73,24 @@
     </main>
 </div>
 <!--INCLUDE_TEMPLATES-->
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script defer src="//code.getmdl.io/1.2.1/material.min.js"></script>
 <script src="../customElements.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+<script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 <script defer src="index.js"></script>
+<script>
+  if (!navigator.serviceWorker.controller) {
+    console.log("This page is not controlled by a ServiceWorker (yet)");
+  } else {
+    console.log("This page is controlled by a ServiceWorker");
+  }
+
+  // Let's register our serviceworker
+  navigator.serviceWorker.register('serviceWorker.js', {
+      // The scope cannot be parent to the script url
+      scope: './'
+    })
+    .then((registration) => console.log('ServiceWorker registration successful with scope: ', registration.scope))
+  .catch((err) => console.log('ServiceWorker registration failed: ', err));
+</script>
 </body>
 </html>
