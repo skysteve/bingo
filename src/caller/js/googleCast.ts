@@ -3,20 +3,28 @@ declare var cast; // TODO find types
 declare var chrome;// TODO find types
 
 export class GoogleCast {
-  private session: any;
+  private sessions: Array<any>;
   private onMsgCB: Function;
+  private elButton: any;
+  private elCastIcon: any;
 
   constructor() {
+    this.sessions = [];
     const sessionRequest = new chrome.cast.SessionRequest('2B0E5446');
     const apiConfig = new chrome.cast.ApiConfig(sessionRequest,
       this.sessionListener.bind(this),
       this.receiverListener.bind(this));
 
-    chrome.cast.initialize(apiConfig, this.onInitSuccess, this.onError);
+    chrome.cast.initialize(apiConfig, this.onInitSuccess.bind(this), this.onError.bind(this));
+
+    this.elButton = document.querySelector('#aCast');
+    this.elButton.addEventListener('click', this.onCastClick.bind(this));
+
+    this.elCastIcon = document.querySelector('#castIcon');
   }
 
   public isAvailable(): boolean {
-    return !!this.session;
+    return this.sessions.length > 0;
   }
 
   public set onMessage(fn: Function) {
@@ -24,17 +32,26 @@ export class GoogleCast {
   }
 
   public sendMessage(msg: any) {
-    if (this.session) {
-      this.session.namespaces.forEach(namesp => this.session.sendMessage(namesp.name, msg));
-    }
+    this.sessions.forEach((session) => {
+      session.namespaces.forEach(namesp => session.sendMessage(namesp.name, msg));
+    });
   }
 
   private sessionListener(session: any) {
-    this.session = session;
+    this.sessions.push(session);
     console.log('Cast session initialised');
+
+    this.elCastIcon.textContent = 'cast_connected';
+
+    session.addUpdateListener(this.onSessionUpdate.bind(this, session));
+
+    if (!this.onMsgCB) {
+      return;
+    }
     this.onMsgCB({
       data: {
-        messageType: 'display_connected'
+        messageType: 'display_connected',
+        type: 'cast'
       }
     });
   }
@@ -42,11 +59,24 @@ export class GoogleCast {
   private receiverListener(e) {
     if( e === chrome.cast.ReceiverAvailability.AVAILABLE) {
       console.log('cast receivers available');
+      document.querySelector('#castIcon').removeAttribute('style');
     } else if (e === chrome.cast.ReceiverAvailability.UNAVAILABLE) {
       console.log('cast receivers unavailable');
     } else {
       console.log('receiver event', e);
       this.onMsgCB(e);
+    }
+  }
+
+  private onSessionUpdate(session, msg) {
+    // if session stopped, remove from the sessions list
+    if (session.status === chrome.cast.SessionStatus.STOPPED) {
+      const index = this.sessions.findIndex(ses => ses.sessionId === session.sessionId);
+      this.sessions.splice(index, 1);
+    }
+
+    if (!this.isAvailable()) {
+      this.elCastIcon.textContent = 'cast';
     }
   }
 
@@ -57,16 +87,26 @@ export class GoogleCast {
   private onError() {
     console.log('cast error', arguments);
   }
-}
 
-function onRequestSessionSuccess() {
-  console.log('cast session success', arguments);
-}
+  private onRequestSessionSuccess(session) {
+    if (session) {
+      this.sessionListener(session);
+    }
+    console.log('cast session success', arguments);
+  }
 
-function onLaunchError() {
-  console.log('cast launch error', arguments);
-}
+  private onLaunchError() {
+    console.log('cast launch error', arguments);
+  }
 
-export function onCastClick() {
-  chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
+  private onCastClick() {
+    // if connected, disconnect
+    if (this.isAvailable()) {
+      this.sessions[0].stop(() => {}, () => {});
+      return;
+    }
+
+    // otherwise connect
+    chrome.cast.requestSession(this.onRequestSessionSuccess.bind(this), this.onLaunchError.bind(this));
+  }
 }

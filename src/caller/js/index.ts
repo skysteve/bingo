@@ -3,7 +3,6 @@
  */
 import {ChannelManager} from './ChannelManager';
 import {Game} from './Game';
-import {onCastClick} from './googleCast';
 declare var window;
 declare var console;
 declare var document;
@@ -16,12 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const elements = {
     buttons: {
       callNumber: document.querySelector('#btn-call'),
-      resetGame: document.querySelector('#btn-reset'),
-      cast: document.querySelector('#aCast')
-    },
-    connection: {
-      connected: document.querySelector('#display-connected'),
-      disconnected: document.querySelector('#display-disconnected')
+      resetGame: document.querySelector('#btn-reset')
     },
     display: {
       lastCalled: document.querySelector('#latest-number'),
@@ -59,18 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     switch (e.data.messageType) {
       case 'display_connected':
         displayConnected = true;
-        elements.connection.connected.removeAttribute('style');
-        elements.connection.disconnected.style.display = 'none';
         channelManager.sendMessage({
           messageType: 'active_game',
           calledNumbers: game.calledNumbers,
           latestNumber: game.latestNumber
         });
+
         break;
       case 'display_disconnected':
         displayConnected = false;
-        elements.connection.connected.style.display = 'none';
-        elements.connection.disconnected.removeAttribute('style');
         break;
       default:
         console.warn('Unknown message type', e.data);
@@ -82,8 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
       messageType: 'caller_disconnected'
     });
   });
-
-  elements.buttons.cast.addEventListener('click', onCastClick);
 
   channelManager.sendMessage({
     messageType: 'caller_connected'

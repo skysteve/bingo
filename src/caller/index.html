@@ -41,35 +41,25 @@
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="../display" target="_blank">Open Display</a>
                 <a class="mdl-navigation__link" href="javascript:void(0);" id="aCast">
-                  <i class="material-icons">cast</i>
+                  <i class="material-icons" id="castIcon" style="display: none;">cast</i>
                 </a>
             </nav>
         </div>
     </header>
     <main class="mdl-layout__content">
-        <div class="page-content">
-          <div id="display-disconnected">
-            <div class="mdl-grid">
-              <div class="mdl-cell mdl-cell--12-col">
-                <h2>No display is connected.</h2>
-                <p>Use the link above to open the display. You should then cast it to a big screen</p>
-              </div>
-            </div>
+      <div class="page-content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--5-col">
+              <button id="btn-call" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Call number</button>
+              <h3>Last Called</h3>
+              <h3 id="latest-number">-</h3>
+            <button id="btn-reset" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Reset Game</button>
           </div>
-          <div id="display-connected" style="display: none;">
-            <div class="mdl-grid">
-              <div class="mdl-cell mdl-cell--5-col">
-                  <button id="btn-call" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Call number</button>
-                  <h3>Last Called</h3>
-                  <h3 id="latest-number">-</h3>
-                <button id="btn-reset" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Reset Game</button>
-              </div>
-              <div class="mdl-cell mdl-cell--7-col" id="previousHolder">
-                <table-last-called id="table-last-called"></table-last-called>
-              </div>
-            </div>
-          </div><!-- end display connected view -->
+          <div class="mdl-cell mdl-cell--7-col" id="previousHolder">
+            <table-last-called id="table-last-called"></table-last-called>
+          </div>
         </div>
+      </div>
     </main>
 </div>
 <!--INCLUDE_TEMPLATES-->

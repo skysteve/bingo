@@ -38,7 +38,6 @@ export class ChannelManager {
     }));
   }
 
-
   private onCastAvailable(isAvailable: boolean) {
     if (isAvailable) {
       this.channelCast = new GoogleCast();
