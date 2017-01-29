@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Bingo Caller</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f44336">
+    <meta name="apple-mobile-web-app-title" content="Bingo">
+    <link rel="apple-touch-icon-precomposed" href="../images/apple-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#f44336">
+
+    <link rel="shortcut icon" href="../images/favicon.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-blue.min.css" />
+  <style>
+    .mdl-card__actions {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .mdl-card {
+      padding: 8px;
+    }
+  </style>
+</head>
+<body class="mdl-base">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title" style="left: -50px;">Bingo</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="../display" target="_blank">Open Display</a>
+                <a class="mdl-navigation__link aCast" href="javascript:void(0);">
+                  <i class="material-icons castIcon" style="display: none;">cast</i>
+                </a>
+            </nav>
+            <nav class="mdl-navigation mdl-layout--small-screen-only"></a>
+              <a class="mdl-navigation__link aCast" href="javascript:void(0);">
+                <i class="material-icons castIcon" style="display: none;">cast</i>
+              </a>
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="mdl-layout__tab-panel is-active">
+        <section class="section--center mdl-grid mdl-shadow--2dp">
+          <div class="mdl-card mdl-cell mdl-shadow--2dp mdl-cell--6-col">
+            <div class="mdl-card__supporting-text">
+              <h3>Last Called</h3>
+              <h3 id="latest-number">-</h3>
+            </div>
+            <div class="mdl-card__actions">
+              <button id="btn-call" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Call number</button>
+            </div>
+          </div>
+          <div class="mdl-card mdl-cell mdl-shadow--2dp mdl-cell--6-col">
+            <div class="mdl-card__supporting-text">
+              <h3>Previous Numbers</h3>
+              <table-last-called id="table-last-called"></table-last-called>
+            </div>
+            <div class="mdl-card__actions">
+              <button id="btn-reset" class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored">Reset Game</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+</div>
+<script defer src="//code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="../customElements.js"></script>
+<script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+<script defer src="index.js"></script>
+<script>
+  if (!navigator.serviceWorker.controller) {
+    console.log("This page is not controlled by a ServiceWorker (yet)");
+  } else {
+    console.log("This page is controlled by a ServiceWorker");
+  }
+
+  // Let's register our serviceworker
+  navigator.serviceWorker.register('serviceWorker.js', {
+      // The scope cannot be parent to the script url
+      scope: './'
+    })
+    .then((registration) => console.log('ServiceWorker registration successful with scope: ', registration.scope))
+  .catch((err) => console.log('ServiceWorker registration failed: ', err));
+</script>
+</body>
+</html>

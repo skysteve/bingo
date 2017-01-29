@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Bingo Display</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-blue.min.css" />
+  <style>
+    #latest_number {
+      text-align: center;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
+      word-wrap: break-word;
+      display: inline-block;
+      font-size: 55vw;
+      margin-top: 23vw;
+    }
+    body {
+      cursor: none;
+    }
+    h3#previous_numbers {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h3 id="latest_number">-</h3>
+            </div>
+            <div class="mdl-cell mdl-cell--7-col" id="previousHolder" style="display:none">
+              <h3 id="previous_numbers">Previous Numbers</h3>
+              <table-last-called id="tableLastCalled"></table-last-called>
+            </div>
+          </div>
+        </div>
+    </main>
+  <div id="toastMsg" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+</div>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="../customElements.js"></script>
+<script defer src="index.js"></script>
+</body>
+</html>
